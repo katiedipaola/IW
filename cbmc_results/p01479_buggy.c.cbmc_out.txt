@@ -1,0 +1,18 @@
+CBMC version 6.4.1 (cbmc-6.4.1) 64-bit x86_64 macos
+Type-checking p01479_buggy
+
+Errors:
+**** WARNING: Depth-bounded analysis may yield unsound verification results
+file buggy_code/p01479_buggy.c line 3 function main: function 'scanf' is not declared
+file buggy_code/p01479_buggy.c line 4 function main: function 'strlen' is not declared
+file buggy_code/p01479_buggy.c line 19 function main: function 'puts' is not declared
+file buggy_code/p01479_buggy.c line 20 function main: function 'exit' is not declared
+file buggy_code/p01479_buggy.c line 2: 'main' with signature 'signed int (signed int i, signed int j, signed int m, signed int r)' found, but expecting one of:
+   int main(void)
+   int main(int argc, char *argv[])
+   int main(int argc, char *argv[], char *envp[])
+If this is a non-standard main entry point please provide a custom
+entry function and use --function instead
+SUPPORT FUNCTION GENERATION ERROR
+
+Execution Time: 0.34 seconds
