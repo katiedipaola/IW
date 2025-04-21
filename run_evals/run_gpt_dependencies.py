@@ -1,4 +1,4 @@
-# run gpt on all files in buggy_dir - with dependencies
+# run gpt on all files in buggy_dir - with dependencies (CProver)
 
 from openai import OpenAI
 import os
@@ -15,8 +15,9 @@ import time
 
 
 # Directory containing buggy .c files
-buggy_dir = "buggy_code_cprover"
-output_dir = "gpt_results_cprover2"
+buggy_dir = ""
+output_dir = ""
+api_key = ""
 os.makedirs(output_dir, exist_ok=True)
 
 # GPT prompt
@@ -91,10 +92,10 @@ for folder in os.listdir(buggy_dir):
                                 message += "\nIncluded File stubs.h:\n" + stubs_h + "\nIncluded File stubs.c:\n" + stubs_c
                         
                         # make call to gpt
-                        client = OpenAI(api_key="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")
+                        client = OpenAI(api_key=api_key)
                         start_time = time.time()
                         completion = client.chat.completions.create(
-                            model="gpt-4o-mini",
+                            model="gpt-4o",
                             messages=[
                                 {"role": "system", "content": "You are a C verification program that finds bugs in C code."},
                                 {
@@ -109,5 +110,4 @@ for folder in os.listdir(buggy_dir):
                         with open(output_path, "w") as output_file:
                             print(completion.choices[0].message.content, file=output_file)
                             print(f"\nExecution Time: {duration:.2f} seconds\n", file=output_file)
-                            # print(message, file=output_file)
                     print(f"GPT analysis completed for {filename}, results saved to {output_path}")

@@ -5,8 +5,8 @@ import subprocess
 import time
 
 # Directory containing buggy .c files
-buggy_dir = "buggy_code"
-output_dir = "cbmc_results"
+buggy_dir = ""
+output_dir = ""
 os.makedirs(output_dir, exist_ok=True)
 
 # CBMC command options
@@ -14,7 +14,7 @@ cbmc_options = "--depth 200 --unwind 10 --trace"
 
 # Timeout duration in seconds (10 minutes)
 timeout_duration = 10 * 60  
-filename = "p00001_buggy.c"
+filename = ""
 
 file_path = os.path.join(buggy_dir, filename)
 output_path = os.path.join(output_dir, f"{filename}.cbmc_out.txt")

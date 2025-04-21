@@ -5,8 +5,8 @@ import subprocess
 import time
 
 # Directory containing buggy .c files
-buggy_dir = "buggy_code"
-output_dir = "cbmc_results"
+buggy_dir = ""
+output_dir = ""
 os.makedirs(output_dir, exist_ok=True)
 
 # CBMC command options

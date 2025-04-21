@@ -3,8 +3,8 @@
 # run cmbc on all files in buggy_dir - with dependencies
 
 # Directory containing buggy .c files
-buggy_dir="buggy_code_cprover"
-output_dir="cbmc_results_cprover"
+buggy_dir=""
+output_dir=""
 mkdir -p "$output_dir"
 
 stubs_path="$buggy_dir/stubs.c"

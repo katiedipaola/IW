@@ -1,4 +1,4 @@
-# run gpt on single file - with dependencies
+# run gpt on single file - with dependencies (CProver)
 
 from openai import OpenAI
 import os
@@ -6,11 +6,12 @@ import time
 
 
 # Directory containing buggy .c files
-buggy_dir = "buggy_code_cprover"
-output_dir = "gpt_results_cprover2"
+buggy_dir = ""
+output_dir = ""
 os.makedirs(output_dir, exist_ok=True)
-folder_to_run = "NetBSD-libc"
-file_to_run = "anyMeta_ptr_bad.c"
+folder_to_run = ""
+file_to_run = ""
+api_key = ""
 
 # GPT prompt
 prompt = "Check the Main file C program and any functions it calls from its included files for the following four errors: 1. Buffer Overflow. 2. Dereference Failure. This means dereferencing a null/invalid/dangling pointer. 3. Pointer Relation. This means pointers not within valid allocated memory or pointer arithmetic that leads to undefined behavior. 4. Arithmetic Overflow. If you find an error, state the error type, exactly where the error occurred, and provide an example input that results in the error. Do not output any more information than that. Do not output the error type unless you found an example of the error. For example, do not put the words 'Arithmetic Overflow' in your response unless you find an arithmetic overflow error. Do not output any errors that occur in functions in the included files not called by the Main file. You must assume that constant variables from .h files can never change. Be concise. If you do not find any errors, simply output 'Program Verified' and nothing else. Follow these directions exactly.\n"
@@ -84,10 +85,10 @@ for folder in os.listdir(buggy_dir):
                                 message += "\nIncluded File stubs.h:\n" + stubs_h + "\nIncluded File stubs.c:\n" + stubs_c
                         
                         # make call to gpt
-                        client = OpenAI(api_key="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")
+                        client = OpenAI(api_key=api_key)
                         start_time = time.time()
                         completion = client.chat.completions.create(
-                            model="gpt-4o-mini",
+                            model="gpt-4o",
                             messages=[
                                 {"role": "system", "content": "You are a C verification program that finds bugs in C code."},
                                 {
@@ -102,5 +103,4 @@ for folder in os.listdir(buggy_dir):
                         with open(output_path, "w") as output_file:
                             print(completion.choices[0].message.content, file=output_file)
                             print(f"\nExecution Time: {duration:.2f} seconds\n", file=output_file)
-                            # print(message, file=output_file)
                     print(f"GPT analysis completed for {filename}, results saved to {output_path}")

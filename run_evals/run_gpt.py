@@ -6,9 +6,10 @@ import time
 
 
 # Directory containing buggy .c files
-buggy_dir = "buggy_code"
-output_dir = "gpt_results"
+buggy_dir = ""
+output_dir = ""
 os.makedirs(output_dir, exist_ok=True)
+api_key = ""
 
 # GPT prompt
 prompt = "Check this C program for the following four errors: 1. Buffer Overflow. 2. Dereference Failure. This means dereferencing a null/invalid/dangling pointer. 3. Pointer Relation. This means pointers not within valid allocated memory or pointer arithmetic that leads to undefined behavior. 4. Arithmetic Overflow. If you find an error, state the error type, exactly where the error occurred, and provide an example input that results in the error. Do not output any more information than that. Do not output the error type unless you found an example of the error. For example, do not put the words 'Arithmetic Overflow' in your response unless you find an arithmetic overflow error. Be concise. If you do not find any errors, simply output 'Program Verified' and nothing else. Follow these directions exactly.\n"
@@ -28,10 +29,10 @@ for filename in os.listdir(buggy_dir):
 
                 message = prompt + code
 
-                client = OpenAI(api_key="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")
+                client = OpenAI(api_key=api_key)
                 start_time = time.time()
                 completion = client.chat.completions.create(
-                    model="gpt-4o-mini",
+                    model="gpt-4o",
                     messages=[
                         {"role": "system", "content": "You are a C verification program that finds bugs in C code."},
                         {
