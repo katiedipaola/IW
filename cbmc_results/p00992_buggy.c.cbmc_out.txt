@@ -1,8 +1,0 @@
-CBMC version 6.4.1 (cbmc-6.4.1) 64-bit x86_64 macos
-
-Errors:
-**** WARNING: Depth-bounded analysis may yield unsound verification results
-file buggy_code/p00992_buggy.c line 2 function a: syntax error before ','
-PARSING ERROR
-
-Execution Time: 0.31 seconds
