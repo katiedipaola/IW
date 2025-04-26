@@ -1,3 +1,0 @@
-Error Type: Buffer Overflow  
-Error Occurred: In the line `scanf("%c", &s);` within the loop `rep(i, 100001)`.  
-Example Input: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" (more than 100000 characters) would exceed the buffer for variable `s`.
